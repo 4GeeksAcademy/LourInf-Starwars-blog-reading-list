@@ -8,7 +8,7 @@ export const Navbar = () => {
 	const  {store, actions } = useContext (Context); //3. destructuring store & actions
 
 	return (
-		<nav className="navbar navbar-light bg-light ms-4 me-4">
+		<nav className="navbar navbar-light bg-secondary ms-4 me-4">
 			<Link to= "/" className="navbar-brand">
 				<span><img src={ starwarsLogo } alt="starwars logo" width="100" height="150"/></span>
 			</Link>

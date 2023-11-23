@@ -7,6 +7,9 @@ export const Characters = () =>{
     const  {store, actions } = useContext (Context); //3. destructuring store & actions
     const urlImg = "#";
     
+    const handleGetDetails = () => {
+        actions.getCharacterDetails("1");
+    }
     
     return(
         <div>
@@ -17,11 +20,16 @@ export const Characters = () =>{
                         <h5 className="card-title">Name of character</h5>
                         <p className="card-text">Something about Character</p>
                         <p className="card-text">Something about Character</p>
-                        <button className="btn btn-outline-secondary me-4">Learn more!</button>
+                        <button className="btn btn-outline-secondary me-4" onClick={handleGetDetails}>Learn more!</button>
                         <button className="btn btn-outline-warning">
                             <FontAwesomeIcon icon={faHeart} />
                         </button>
                     </div>
+             </div>
+
+
+             <div>
+              
              </div>
         </div>
     )
