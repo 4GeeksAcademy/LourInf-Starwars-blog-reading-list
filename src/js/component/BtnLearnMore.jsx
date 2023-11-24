@@ -13,7 +13,7 @@ export const BtnLearnMore = () => {
 
     return (
         <>
-            <Link to="/details">
+            <Link to="/characters/:characterId">
                 <button className="btn btn-outline-secondary me-4" onClick={handleGetDetails}>Learn more!</button>
             </Link>
         </>
