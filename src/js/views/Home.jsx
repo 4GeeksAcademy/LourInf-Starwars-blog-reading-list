@@ -1,12 +1,13 @@
 import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import starwarsBlackWhite from '../../img/starwars_blackwhite.png';
 
 export const Home = () => (
 	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
+		<span><img src={ starwarsBlackWhite } alt="starwars logo"  width="1100" height="700"/></span>
 		<div className="container-fluid">
 			
 		</div>
 	</div>
 );
+

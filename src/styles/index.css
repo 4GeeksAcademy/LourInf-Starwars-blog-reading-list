@@ -3,5 +3,8 @@
 */
 
 body{
-    background-color: #6C757D;
+    background-color: black;
+    background: url("https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    width: 100%;
 }
