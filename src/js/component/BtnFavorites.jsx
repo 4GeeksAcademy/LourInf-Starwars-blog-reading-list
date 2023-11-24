@@ -5,8 +5,8 @@ export const BtnFavorites = () =>{
 
     return(
         <div className="dropdown">
-  <button className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-expanded="false">
-    Favorites <span className="badge text-warning">4</span>
+  <button className="btn btn-outline-warning fs-5 dropdown-toggle" data-bs-toggle="dropdown" type="button" aria-expanded="false">
+    Favorites <span className="badge text-warning bg-secondary">4</span>
   </button>
   <ul className="dropdown-menu">
     <li><Link className="dropdown-item" to="#">Action</Link></li>
