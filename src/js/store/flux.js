@@ -5,7 +5,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites: [],
 			characters: [],
 			planets: [],
+			starships: [],
 			characterDetails:{},
+			planetDetails:{},
+			starshipsDetails:{}
 		},
 		
 		actions: {
@@ -31,11 +34,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log ("Error:", response.status, response.statusText);
 				}
 			},
-			addFavorites: (item) =>{  //1. in order to add sth to favorites we first need to receive sth, that's why we have parameter item
-				const store = getStore(); //2. we need to get whatever I have at the moment in store-favorites so we need to access store and then favorites
-				store.favorites;
-				setStore({favorites: [...store.favorites, item]}) //3. we want to reset the global store value of favorites, so we use setStore(). And 4. we want to be able to add the item as the new value so we use the spread operator inside (what we want to change is favorites, and the new value is that we want to add item to it
-				//we can also write it like: setStore({favorites: [...getStore().favorites, item]})
+
+
+			addFavorites: ({ type, name }) => {
+				// 1. in order to add something to favorites, we first need to receive something, that's why we have "type" and "name" parameters
+				const store = getStore(); // 2. We need to get whatever is currently in store.favorites, so we access store and then favorites
+				// 3. we need to check if the item is already in favorites using .map and .includes
+				const isItemInFavorites = store.favorites.map((item) => item.name === name && item.type === type).includes(true);
+				// 4. if the item is not in favorites, add it; otherwise, remove it
+				const updatedFavorites = isItemInFavorites
+					? store.favorites.filter((item) => !(item.name === name && item.type === type))
+					: [...store.favorites, { type, name }];
+			
+				setStore({ favorites: updatedFavorites });
 			},
 
 			removeFavorites: (name) =>{
@@ -44,25 +55,88 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  });
 				},
 
-			getCharacterDetails: async (id) => {
-				const url = process.env.API_URL + "/people/" + id;
-				const options = {
-					method: "GET"
-				};
-				const response = await fetch (url,options);
-				console.log(response);
-				if (response.ok) {
-					const data = await response.json();
-					console.log(data);
-					setStore({ characterDetails: data.result.properties }); //1. if response ok, we save the properties inside store-characterDetails{}. Now instead of having an empty object of the character details in store, we will have the properties such as height, mass, hair_color, etc (we can check that in react dev tools)
+				getCharacterDetails: async (id) => {
+					const url = process.env.API_URL + "/people/" + id;
+					const options = {
+						method: "GET"
+					};
+					const response = await fetch(url, options);
+					console.log(response);
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data);
+						setStore({ characterDetails: data.result.properties }); //1. if response ok, we save the properties inside store-characterDetails{}. Now instead of having an empty object of the character details in store, we will have the properties such as height, mass, hair_color, etc (we can check that in react dev tools)
 					//2. we could save it in localStorage too but in this case it's not needed, the important ones to be saved were the favorites ones.
-
-					console.log ("Error:", response.status, response.statusText);
-				}
-
+					} else {
+						console.log("Error: ", response.status, response.statusText);
+					}
+				},
 			
+				getPlanets: async () => {
+					const url = process.env.API_URL + "/planets/";
+					const options = {
+						method: "GET"
+					};
+					const response = await fetch(url, options);
+					console.log(response);
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data);
+						setStore({ planets: data.results });
+					} else {
+						console.log("Error: ", response.status, response.statusText);
+					}
+				},
+
+				getPlanetDetails: async (id) => {
+					const url = process.env.API_URL + "/planets/" + id;
+					const options = {
+						method: "GET"
+					};
+					const response = await fetch(url, options);
+					console.log(response);
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data);
+						setStore({ planetDetails: data.result.properties });
+					} else {
+						console.log("Error: ", response.status, response.statusText);
+					}
+				},
+				
+				getStarships: async () => {
+					const url = process.env.API_URL + "/starships";
+					const options = {
+						method: "GET"
+					};
+					const response = await fetch(url, options);
+					console.log(response);
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data);
+						setStore({ starships: data.results });
+					} else {
+						console.log("Error: ", response.status, response.statusText);
+					}
+				},
+
+				getPlanetDetails: async (id) => {
+					const url = process.env.API_URL + "/starships/" + id;
+					const options = {
+						method: "GET"
+					};
+					const response = await fetch(url, options);
+					console.log(response);
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data);
+						setStore({ starshipDetails: data.result.properties });
+					} else {
+						console.log("Error: ", response.status, response.statusText);
+					}
+				}		
 			
 		}
-	}};
+	}
 };
 export default getState;

@@ -14,6 +14,7 @@ export const Navbar = () => {
 			</Link>
 			<Link to= "/characters" className="nav-link text-decoration-none text-secondary fs-4">Characters</Link>
 			<Link to= "/planets" className="nav-link text-decoration-none text-secondary fs-4">Planets</Link>
+			<Link to= "/starships" className="nav-link text-decoration-none text-secondary fs-4">Starships</Link>
 			<div className="ml-auto">
 			<Link to= "/favorites"><BtnFavorites /></Link>
 				
