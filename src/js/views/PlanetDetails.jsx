@@ -36,10 +36,15 @@ export const PlanetDetails = () =>{
                             <Spinner />
                         :
                         <div className="text-center flex-grow-1">
-                        <p><strong> Model: </strong> {store.planetDetails.model}</p>
-                        
-                        
-                        </div>
+                        <p><strong> Diameter: </strong> {store.planetDetails.diameter}</p>
+                        <p><strong> Climate: </strong> {store.planetDetails.climate}</p>
+                        <p><strong> Gravity: </strong> {store.planetDetails.gravity}</p>
+                        <p><strong> Orbital Period: </strong> {store.planetDetails.orbital_period}</p>
+                        <p><strong> Population: </strong> {store.planetDetails.population}</p>
+                        <p><strong> Rotation Period: </strong> {store.planetDetails.rotation_period}</p>
+                        <p><strong> Surface Water: </strong> {store.planetDetails.surface_water}</p>
+                        <p><strong> Terrain: </strong> {store.planetDetails.terrain}</p>
+            </div>
                         }
                         
                             <Link to="/planets" className="btn btn-outline-secondary">

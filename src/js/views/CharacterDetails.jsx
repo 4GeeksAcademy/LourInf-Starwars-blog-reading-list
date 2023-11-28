@@ -49,6 +49,7 @@ export const CharacterDetails = () =>{
                         <p><strong> Height: </strong>{store.characterDetails.height}</p>
                         <p><strong> Mass: </strong> {store.characterDetails.mass}</p>
                         <p><strong> Skin Color: </strong>{store.characterDetails.skin_color}</p>
+                        <p><strong> Homeworld: </strong> {store.characterDetails.homeworld}</p>
                         </div>
                         }
                         
