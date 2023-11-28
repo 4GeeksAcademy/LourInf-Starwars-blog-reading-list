@@ -8,16 +8,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			starships: [],
 			characterDetails:{},
 			planetDetails:{},
-			starshipsDetails:{}
+			starshipDetails:{}
 		},
 		
 		actions: {
 			/*Notes on Syntax inside actions: 
-					getActions() ==> use it to call another action (function) within an action (function)
-					const store = getStore(); ==> use it to access to some value inside store
+					getActions() ==> use it to call another action (function) inside actions (function)
+					getStore(); ==> use it to access to some value inside store
 					setStore({ key: value }); ==> use it to reset the global store value (graba los datos en el store). key: what we want to change; value: new value we want to give it
 			*/
+			
 			getCharacters: async () => {
+				let characters = localStorage.getItem("characters")
+				if (characters) {
+					setStore({characters: JSON.parse(characters)})
+					return
+				}
+
 				const url = process.env.API_URL + "/people";
 				const options = {
 					method: "GET"
@@ -39,23 +46,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addFavorites: ({ type, name }) => {
 				// 1. in order to add something to favorites, we first need to receive something, that's why we have "type" and "name" parameters
 				const store = getStore(); // 2. We need to get whatever is currently in store.favorites, so we access store and then favorites
-				// 3. we need to check if the item is already in favorites using .map and .includes
+				// 3. we need to check if the item is already in favorites using .map and .includes. If there is a match, isItemInFavorites will be true
 				const isItemInFavorites = store.favorites.map((item) => item.name === name && item.type === type).includes(true);
-				// 4. if the item is not in favorites, add it; otherwise, remove it
-				const updatedFavorites = isItemInFavorites
-					? store.favorites.filter((item) => !(item.name === name && item.type === type))
+				// 4. if the item is in favorites (isItemInFavorites=true), we use .filter() to create a new array that includes all items from store.favorites except the one that matches the specified name and type
+				//if the item is not in favorites (isItemInFavorites=false), we use spread operator to create an array that includes all items existing in store.favorites and adds a new object at the end with the specified type and name
+				const updatedFavorites = isItemInFavorites ? store.favorites.filter((item) =>
+					 !(item.name === name && item.type === type))
 					: [...store.favorites, { type, name }];
-			
+				//5.we update the state of the store's favorites with the modified list
 				setStore({ favorites: updatedFavorites });
 			},
 
 			removeFavorites: (name) =>{
 				setStore({       ///1. as we want to remove sth we already have, we need to access directly setStore() so we can change the global store value of favorites.
-					favorites: store.favorites.filter((item) => item !== name) //2. to remove we use the method filter
+					favorites: store.favorites.filter((item) => item.name !== name)//2. to remove we use the method filter
 				  });
 				},
 
-				getCharacterDetails: async (id) => {
+			getCharacterDetails: async (id) => {
 					const url = process.env.API_URL + "/people/" + id;
 					const options = {
 						method: "GET"
@@ -120,7 +128,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				},
 
-				getPlanetDetails: async (id) => {
+				getStarshipDetails: async (id) => {
 					const url = process.env.API_URL + "/starships/" + id;
 					const options = {
 						method: "GET"
@@ -134,7 +142,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					} else {
 						console.log("Error: ", response.status, response.statusText);
 					}
-				}		
+				},
 			
 		}
 	}

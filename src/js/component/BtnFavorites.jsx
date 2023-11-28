@@ -1,5 +1,4 @@
 import React, {useContext} from "react";  //1. Import hook useContext
-import { Link }  from "react-router-dom"; //import Link
 import { Context } from "../store/appContext.js"; //2. Import Context
 
 export const BtnFavorites = () =>{
@@ -17,7 +16,7 @@ export const BtnFavorites = () =>{
           store.favorites.map((item, id) => (
             <li key={id} className="d-flex p-1">
               <span className="dropdown-item">{item.type} - {item.name}</span>
-              <button className="btn" onClick={() => actions.addFavorites({ type: item.type, name: item.name })}>
+              <button className="btn" onClick={() => actions.removeFavorites(item, id)}>
                 <i className="fa fa-trash text-warning"></i>
               </button>
             </li>
