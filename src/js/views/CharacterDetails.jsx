@@ -31,9 +31,9 @@ export const CharacterDetails = () =>{
     };
 
     return(
-        <div>
-        <h1 className="text-center mt-3">Character Details</h1> 
-            <div className="card m-auto mt-5 d-flex flex-row bg-dark text-white" style={{ width: "60rem" }}>
+        <div className="mt-5 pt-5">
+        <h1 className="text-center mt-4">Character Details</h1> 
+            <div className="card m-auto mt-4 d-flex flex-row bg-dark text-white" style={{ width: "60rem" }}>
                 <img src={`${urlImg}${params.characterId}.jpg`} onError={handleError} className="card-img" alt="character image" />
                     <div className="card-body d-flex flex-column col-11">
                         <h3 className="card-title text-center mb-4 text-warning">{store.characterDetails.name}</h3> 

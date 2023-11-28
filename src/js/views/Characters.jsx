@@ -14,7 +14,7 @@ export const Characters = () =>{
             }
        
     return(
-        <div>
+        <div className="mt-5 pt-5">
             <h1 className="text-warning m-3 text-center">Characters</h1>
             <div className= "container d-flex flex-wrap align-items-row">
             {store.characters.map((character, index) => {
