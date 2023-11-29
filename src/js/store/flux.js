@@ -58,6 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			removeFavorites: (name) =>{
+				const store = getStore();
 				setStore({       ///1. as we want to remove sth we already have, we need to access directly setStore() so we can change the global store value of favorites.
 					favorites: store.favorites.filter((item) => item.name !== name)//2. to remove we use the method filter
 				  });
