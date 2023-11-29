@@ -1,9 +1,12 @@
 import React, {useContext} from "react";  //1. Import hook useContext
-import { Link }  from "react-router-dom"; //import Link
 import { Context } from "../store/appContext.js"; //2. Import Context
 
 export const BtnFavorites = () =>{
   const  {store, actions } = useContext (Context); //3. destructuring store & actions
+
+  const handleDelete = (name) => {
+    actions.removeFavorites(name);
+};
 
   return (
     <div className="dropdown">
@@ -16,8 +19,8 @@ export const BtnFavorites = () =>{
         ) : (
           store.favorites.map((item, id) => (
             <li key={id} className="d-flex p-1">
-              <span className="dropdown-item">{item.type} - {item.name}</span>
-              <button className="btn" onClick={() => actions.addFavorites({ type: item.type, name: item.name })}>
+             <span className="dropdown-item">{item.type} - {item.name}</span>
+              <button className="btn" onClick={() => handleDelete(item.name)}>
                 <i className="fa fa-trash text-warning"></i>
               </button>
             </li>
