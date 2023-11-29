@@ -21,11 +21,12 @@ export const Starships = () =>{
                   
                   return (
                     
-                    <div key={starship.uid} className="card m-3 bg-dark text-white rounded" style={{ width: "25rem"}}>
-                    <img src= {`${urlImg}${starship.uid}.jpg`} onError={handleError} className="card-img" alt="starship image" />
+                    <div key={starship.uid} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 m-5">
+                        <div className="card m-3 bg-dark text-white" style={{ width: '18rem' }}>
+                    <img src= {`${urlImg}${starship.uid}.jpg`} onError={handleError} className="card-img-top" alt="starship image" />
                     <div className="card-body">
                     <h5 className="card-title mt-2 mb-4">{starship.name}</h5>
-                        <p className="card-text">{`Model: ${starship.model}`}</p>             {/*DOESNT WORK!! same for the 3 <p> */}
+                        <p className="card-text">{`Model: ${starship.model}`}</p>             
                         <p className="card-text">{`Crew: ${starship.crew}`}</p>
                         <p className="card-text">{`Passengers: ${starship.passengers}`}</p>
                         <div className="d-flex justify-content-between">
@@ -34,12 +35,13 @@ export const Starships = () =>{
                             <FontAwesomeIcon icon={faHeart} />
                             </span>
                         </div>
+                        </div>
                     </div>
                     </div>
                     )
                 })
-            }
-        </div> 
-        </div>
-        );
+                }
+                </div>
+                </div> 
+            );
         };
